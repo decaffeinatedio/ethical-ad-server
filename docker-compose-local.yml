@@ -36,18 +36,14 @@ services:
     tty: true
 
   postgres:
-    build:
-      context: .
-      dockerfile: ./docker-compose/production/postgres/Dockerfile
-    image: ethicaladserver_production_postgres
-    volumes:
-      - local_postgres_data:/var/lib/postgresql/data
-      - local_postgres_data_backups:/backups
-    env_file:
-      - ./.envs/local/postgres
+    image: postgres:latest
+    ports:
+      - "5432:5432"
 
   redis:
-    image: redis:5.0
+    image: redis:alpine
+    ports:
+      - "6379:6379"
 
   celeryworker:
     <<: *django

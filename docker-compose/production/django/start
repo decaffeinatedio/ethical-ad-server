@@ -4,11 +4,10 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-
 # Start sshd for Azure
-ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa
-mkdir -p /etc/ssh/run
-/usr/sbin/sshd
+#ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa
+#mkdir -p /etc/ssh/run
+#/usr/sbin/sshd
 
 # Build JS/Node static assets
 npm run build
@@ -16,8 +15,8 @@ npm run build
 # Collect static files using appropriate Django settings
 python /app/manage.py collectstatic --noinput
 
-# Run any outstanding migrations
+# Run any outstanding migrations // NOTE - can move this to bash instead
 #python /app/manage.py migrate
 
 # Start the app listening on port 5000
-newrelic-admin run-program /usr/local/bin/gunicorn config.wsgi --bind 0.0.0.0:5000 --max-requests=10000 --timeout=120 --log-file -
+/usr/local/bin/gunicorn config.wsgi --bind 0.0.0.0:$PORT --max-requests=10000 --timeout=120 --log-file -
