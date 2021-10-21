@@ -8,7 +8,7 @@
 {% block body_content %}
   <nav class="navbar navbar-expand-sm navbar-dark bg-primary p-4">
     <a class="navbar-brand mr-0" href="{% url 'dashboard-home' %}">
-      <span class="text-brand">{% trans 'Ethical Ad Server' %}</span>
+      <span class="text-brand">{% trans 'Ad Server' %}</span>
       <span class="logo-brand"></span>
     </a>
 
@@ -228,7 +228,7 @@
     <div class="d-flex">
       <ul class="list-inline mr-auto">
         <li class="list-inline-item small">
-          <span class="text-muted">© {% now "Y" %} Read the Docs, Inc.</span>
+          <span class="text-muted">© {% now "Y" %}</span>
         </li>
         {% if request.user.is_authenticated %}
           <li class="list-inline-item small">

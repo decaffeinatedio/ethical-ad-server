@@ -5,6 +5,10 @@ set -o pipefail
 set -o nounset
 
 
+npm run build
+
 # Don't auto-migrate locally because this can cause weird issues when testing migrations
 # python manage.py migrate
 python manage.py runserver 0.0.0.0:5000
+# trying this out...
+python manage.py migrate

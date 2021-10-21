@@ -36,6 +36,18 @@ RUN chmod +x /start-celeryworker
 COPY ./docker-compose/local/django/celery/beat/start /start-celerybeat
 RUN chmod +x /start-celerybeat
 
+# Explicitly copy files/directories so no configuration/data/secrets get copied
+COPY ./adserver /app/adserver
+COPY ./assets /app/assets
+COPY ./config /app/config
+COPY ./geoip /app/geoip
+COPY ./templates /app/templates
+COPY ./manage.py /app
+#COPY ./newrelic.ini /app
+COPY ./package.json /app
+COPY ./package-lock.json /app
+COPY ./webpack.config.js /app
+
 WORKDIR /app
 
 # ENTRYPOINT ["/entrypoint"]

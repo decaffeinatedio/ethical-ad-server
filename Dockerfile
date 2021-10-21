@@ -1,13 +1,7 @@
-# Production Docker setup
-#
-# This Dockerfile is not currently used or maintained
-# but may be useful in setting up your own adserver instance.
+# This is intended to be used in production for Heroku. 
 
 FROM python:3.6-alpine
 MAINTAINER Read the Docs, Inc. <support@readthedocs.org>
-
-ENV PYTHONUNBUFFERED 1
-#ENV 1 1
 
 RUN apk update \
   # psycopg2 dependencies
@@ -27,7 +21,9 @@ RUN apk update \
   && apk add git \
   # Needed to build Python Cryptography on Alpine Linux
   # https://cryptography.io/en/latest/installation.html#alpine
-  && apk add openssl-dev cargo
+  && apk add openssl-dev cargo \
+  # add dependencies to shell in for Heroku
+  && apk add bash curl openssh iproute2
 
 RUN addgroup -S django \
     && adduser -S -G django django
@@ -56,25 +52,19 @@ COPY ./config /app/config
 COPY ./geoip /app/geoip
 COPY ./templates /app/templates
 COPY ./manage.py /app
-#COPY ./newrelic.ini /app
 COPY ./package.json /app
-#COPY ./package-lock.json /app
 COPY ./webpack.config.js /app
 
+# also for heroku
+ADD ./.profile.d /app/.profile.d
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
+# Install node dependencies
 WORKDIR /app
 RUN npm cache clean --force
-# Install node dependencies
 RUN npm install
 
-# Allow Azure to SSH into the running container
-# Although the root password is known, port 2222 is inaccessible from the internet
-# https://docs.microsoft.com/en-us/azure/app-service/containers/configure-custom-container#enable-ssh
-#RUN apk add openssh \
-#     && echo "root:Docker!" | chpasswd
-#COPY ./docker-compose/production/django/sshd_config /etc/ssh/
-
-
+# Heroku uses a dynamic port. 
 EXPOSE $PORT
 
 CMD ["/start"]

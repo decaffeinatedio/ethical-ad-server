@@ -178,7 +178,7 @@ SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 # In development, emails are not sent and just logged to the console
 # --------------------------------------------------------------------------
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-SERVER_EMAIL = "noreply@ethicalads.io"
+SERVER_EMAIL = env("NO_REPLY", default="noreply@ethicalads.io")
 DEFAULT_FROM_EMAIL = SERVER_EMAIL
 EMAIL_TIMEOUT = 5
 
@@ -191,7 +191,7 @@ FRONT_AUTHOR = env("FRONT_AUTHOR", default=None)
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 # --------------------------------------------------------------------------
 LANGUAGE_CODE = "en-us"
-TIME_ZONE = "UTC"
+TIME_ZONE = env("TIME_ZONE", default="UTC")
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True

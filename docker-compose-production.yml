@@ -20,34 +20,6 @@ services:
       context: .
       dockerfile: ./docker-compose/production/django/Dockerfile
     image: ethicaladserver_production_django
-    depends_on:
-      - postgres
-      - redis
     env_file:
       - ./.envs/production/.django
-      - ./.envs/production/.postgres
     command: /start
-
-  postgres:
-    build:
-      context: .
-      dockerfile: ./docker-compose/production/postgres/Dockerfile
-    image: ethicaladserver_production_postgres
-    volumes:
-      - production_postgres_data:/var/lib/postgresql/data
-      - production_postgres_data_backups:/backups
-    env_file:
-      - ./.envs/production/.postgres
-
-  redis:
-    image: redis:5.0
-
-  celeryworker:
-    <<: *django
-    image: ethicaladserver_production_celeryworker
-    command: /start-celeryworker
-
-  celerybeat:
-    <<: *django
-    image: ethicaladserver_production_celerybeat
-    command: /start-celerybeat
