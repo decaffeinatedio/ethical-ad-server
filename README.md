@@ -63,12 +63,12 @@ Retrieve your Azure account key by running:
 Note that this requires the Azure CLI. 
 
 ### Heroku
-You will need a free Heroku account and the Heroku CLI. 
+You will need a free Heroku account and the Heroku CLI. You will need a paid account to run in production with a custom (sub)domain and SSL certificate. 
 
 ## Ad Server Setup
 
 ### Local Configuration
-- Clone the `herokuMod` branch to your machine. 
+- Clone the repo to your machine. 
 - Run `make geoip` and `make ipproxy` to download the IP and proxy assets. 
 
 ### Heroku Configuration
