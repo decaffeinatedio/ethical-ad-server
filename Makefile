@@ -4,8 +4,8 @@
 GEOIP_DIR = geoip
 GEOIP_CITY_FILE = GeoLite2-City.mmdb.gz
 GEOIP_COUNTRY_FILE = GeoLite2-Country.mmdb.gz
-GEOIP_CITY_DB_URL = https://download.db-ip.com/free/dbip-city-lite-2021-08.mmdb.gz
-GEOIP_COUNTRY_DB_URL = https://download.db-ip.com/free/dbip-country-lite-2021-08.mmdb.gz
+GEOIP_CITY_DB_URL = https://download.db-ip.com/free/dbip-city-lite-2021-10.mmdb.gz
+GEOIP_COUNTRY_DB_URL = https://download.db-ip.com/free/dbip-country-lite-2021-10.mmdb.gz
 
 TOR_EXIT_LIST_FILE = torbulkexitlist.txt
 TOR_EXIT_LIST_URL = https://check.torproject.org/torbulkexitlist
